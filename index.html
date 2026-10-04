@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>BookHunt - Book Discovery</title>
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script>
@@ -14,102 +14,159 @@
             darkMode: "class"
         }
     </script>
+
+    <script src="script.js" defer></script>
 </head>
 
-<body class="bg-pink-100 text-gray-900">
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-white transition-colors duration-300">
 
-    <!-- HEADER -->
-    <header>
-        <div class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
+    <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
 
             <div>
-                <h1 class="text-2xl font-bold text-black-600">
+                <h1 class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
                     📚 BookHunt
                 </h1>
 
-                <p class="text-sm text-gray-500">
+                <p class="text-sm text-slate-500 dark:text-slate-400">
                     Discover your next favourite book
                 </p>
             </div>
 
-            <button class="px-4 py-2 bg-gray-200 rounded-lg">
+            <button
+                id="themeButton"
+                class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
                 🌙
             </button>
 
         </div>
     </header>
 
+    <section class="max-w-7xl mx-auto px-6 pt-12 pb-8">
+        <div class="text-center max-w-2xl mx-auto">
 
-    <!-- SEARCH SECTION -->
-    <section class="max-w-6xl mx-auto px-6 py-10">
+            <p class="text-indigo-600 dark:text-indigo-400 font-semibold mb-2">
+                BOOK DISCOVERY
+            </p>
 
-        <div class="text-center mb-8">
-
-            <h2 class="text-3xl font-bold mb-2">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">
                 Find Your Next Book
             </h2>
 
-            <p class="text-gray-500">
-                Search and explore thousands of books
+            <p class="text-slate-600 dark:text-slate-400 mb-8">
+                Search thousands of books and explore their details.
             </p>
 
+            <div class="flex max-w-2xl mx-auto shadow-sm">
+
+                <input
+                    id="searchInput"
+                    type="text"
+                    placeholder="Search by book title..."
+                    class="flex-1 px-5 py-3.5 rounded-l-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-indigo-500">
+
+                <button
+                    id="searchButton"
+                    class="px-7 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-r-xl transition">
+                    Search
+                </button>
+
+            </div>
+
         </div>
+    </section>
 
+    <section class="max-w-7xl mx-auto px-6 py-4">
 
-        <!-- SEARCH BAR -->
-        <div class="flex max-w-2xl mx-auto">
+        <div class="flex flex-wrap items-center gap-3">
 
-            <input
-                type="text"
-                placeholder="Search for a book..."
-                class="flex-1 px-5 py-3 border rounded-l-lg outline-none"
-            >
+            <select
+                id="yearFilter"
+                class="px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-white outline-none">
 
-            <button
-                class="px-6 py-3 bg-blue-600 text-white rounded-r-lg">
-                Search
-            </button>
+                <option value="all">All Years</option>
+                <option value="old">Before 2000</option>
+                <option value="new">2000 and After</option>
+
+            </select>
+
+            <select
+                id="sortSelect"
+                class="px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-white outline-none">
+
+                <option value="none">Sort By</option>
+                <option value="az">Title A-Z</option>
+                <option value="za">Title Z-A</option>
+
+            </select>
 
         </div>
 
     </section>
 
+    <section class="max-w-7xl mx-auto px-6 pt-4">
 
-    <!-- FILTERS -->
-    <section class="max-w-6xl mx-auto px-6 mb-8">
+        <p
+            id="loading"
+            class="hidden text-center text-indigo-600 dark:text-indigo-400 font-semibold py-6">
+            Searching for books...
+        </p>
 
-        <div class="flex flex-wrap gap-4">
+        <p id="error" class="text-center text-red-500 font-medium"></p>
 
-            <select class="px-4 py-2 border rounded-lg">
-                <option>All Years</option>
-                <option>Before 2000</option>
-                <option>2000 and After</option>
-            </select>
-
-
-            <select class="px-4 py-2 border rounded-lg">
-                <option>Sort By</option>
-                <option>Title A-Z</option>
-                <option>Title Z-A</option>
-            </select>
-
-        </div>
+        <p
+            id="resultCount"
+            class="text-sm text-slate-500 dark:text-slate-400 mb-5">
+        </p>
 
     </section>
 
+    <main class="max-w-7xl mx-auto px-6 pb-16">
 
-    
+        <div
+            id="bookContainer"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         </div>
 
     </main>
 
+    <div
+        id="detailsModal"
+        class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
 
-    <!-- FOOTER -->
-    <footer class="bg-white border-t py-6 text-center">
+        <div
+            class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
 
-        <p class="text-gray-500">
-            © 2026 BookHunt | Book Discovery Website
-        </p>
+            <div
+                class="sticky top-0 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-6 py-4 flex justify-between items-center">
+
+                <h2
+                    id="detailsTitle"
+                    class="text-xl md:text-2xl font-bold pr-4">
+                </h2>
+
+                <button
+                    id="closeModal"
+                    class="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700">
+                    ✕
+                </button>
+
+            </div>
+
+            <div id="detailsContent" class="p-6"></div>
+
+        </div>
+    </div>
+
+    <footer class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+
+        <div class="max-w-7xl mx-auto px-6 py-6 text-center">
+
+            <p class="text-sm text-slate-500 dark:text-slate-400">
+                © 2026 BookHunt | Book Discovery Website
+            </p>
+
+        </div>
 
     </footer>
 
