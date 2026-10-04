@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BookHunt - Book Discovery</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: "class"
+        }
+    </script>
+</head>
+
+<body class="bg-pink-100 text-gray-900">
+
+    <!-- HEADER -->
+    <header>
+        <div class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
+
+            <div>
+                <h1 class="text-2xl font-bold text-black-600">
+                    📚 BookHunt
+                </h1>
+
+                <p class="text-sm text-gray-500">
+                    Discover your next favourite book
+                </p>
+            </div>
+
+            <button class="px-4 py-2 bg-gray-200 rounded-lg">
+                🌙
+            </button>
+
+        </div>
+    </header>
+
+
+    <!-- SEARCH SECTION -->
+    <section class="max-w-6xl mx-auto px-6 py-10">
+
+        <div class="text-center mb-8">
+
+            <h2 class="text-3xl font-bold mb-2">
+                Find Your Next Book
+            </h2>
+
+            <p class="text-gray-500">
+                Search and explore thousands of books
+            </p>
+
+        </div>
+
+
+        <!-- SEARCH BAR -->
+        <div class="flex max-w-2xl mx-auto">
+
+            <input
+                type="text"
+                placeholder="Search for a book..."
+                class="flex-1 px-5 py-3 border rounded-l-lg outline-none"
+            >
+
+            <button
+                class="px-6 py-3 bg-blue-600 text-white rounded-r-lg">
+                Search
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- FILTERS -->
+    <section class="max-w-6xl mx-auto px-6 mb-8">
+
+        <div class="flex flex-wrap gap-4">
+
+            <select class="px-4 py-2 border rounded-lg">
+                <option>All Years</option>
+                <option>Before 2000</option>
+                <option>2000 and After</option>
+            </select>
+
+
+            <select class="px-4 py-2 border rounded-lg">
+                <option>Sort By</option>
+                <option>Title A-Z</option>
+                <option>Title Z-A</option>
+            </select>
+
+        </div>
+
+    </section>
+
+
+    
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t py-6 text-center">
+
+        <p class="text-gray-500">
+            © 2026 BookHunt | Book Discovery Website
+        </p>
+
+    </footer>
+
+</body>
+</html>
